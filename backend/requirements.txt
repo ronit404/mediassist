@@ -1,0 +1,15 @@
+# Web Framework & Server
+fastapi
+uvicorn[standard]
+pydantic
+
+# Database & Environment Configuration
+pymongo
+python-dotenv
+
+# Data Processing & Machine Learning
+pandas
+numpy
+scikit-learn
+xgboost
+joblib

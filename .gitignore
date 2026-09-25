@@ -1,0 +1,56 @@
+# ==========================================
+# MediAssist Root .gitignore
+# ==========================================
+
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Next.js Build Outputs
+.next/
+*/.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python Virtual Environments & Caches
+venv/
+*/venv/
+.venv/
+*/.venv/
+env/
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.pkl.bak
+
+# Large Data & Raw Dataset Dumps (Exceeds GitHub limits)
+backend/data/raw/
+backend/data/processed/
+*.csv
+*.tsv
+
+# Environment Variables & Secrets
+.env
+.env*.local
+*.env
+backend/.env
+frontend/.env.local
+
+# IDE & OS Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log

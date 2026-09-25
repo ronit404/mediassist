@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  :root {
+    /* ☀️ LIGHT MODE: High Contrast Modern Healthcare UI */
+    --background: #F8FAFC;
+    --foreground: #0F172A;
+    --card: #FFFFFF;
+    --card-foreground: #0F172A;
+    --popover: #FFFFFF;
+    --popover-foreground: #0F172A;
+    --primary: #0284C7;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F1F5F9;
+    --secondary-foreground: #1E293B;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    --accent: #E0F2FE;
+    --accent-foreground: #0369A1;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #0284C7;
+  }
+
+  .dark {
+    /* 🌙 DARK MODE: Deep Obsidian Slate & Luminous Cyan */
+    --background: #0B1120;
+    --foreground: #F1F5F9;
+    --card: #0F172A;
+    --card-foreground: #F8FAFC;
+    --popover: #0F172A;
+    --popover-foreground: #F8FAFC;
+    --primary: #38BDF8;
+    --primary-foreground: #082F49;
+    --secondary: #1E293B;
+    --secondary-foreground: #E2E8F0;
+    --muted: #1E293B;
+    --muted-foreground: #94A3B8;
+    --accent: rgba(56, 189, 248, 0.12);
+    --accent-foreground: #38BDF8;
+    --destructive: #F87171;
+    --destructive-foreground: #450A0A;
+    --border: #1E293B;
+    --input: #1E293B;
+    --ring: #38BDF8;
+  }
+
+  * {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Global typography rules in dark mode to prevent black text */
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: #F8FAFC;
+  }
+
+  .dark p {
+    color: #CBD5E1;
+  }
+
+  /* Global form input rules for dark mode */
+  .dark input:not([type="checkbox"]):not([type="radio"]),
+  .dark select,
+  .dark textarea {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #94A3B8 !important;
+  }
+}
+
+/* Glassmorphism, Cards & Surfaces for both Light & Dark modes */
+.glass-card,
+.saas-card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-card,
+.dark .saas-card {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  border-color: #1E293B;
+}
+
+.glass-card-hover,
+.saas-card-hover {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-card-hover,
+.dark .saas-card-hover {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  border-color: #1E293B;
+}
+
+.glass-card-hover:hover,
+.saas-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 12px 28px -8px rgba(2, 132, 199, 0.12);
+}
+
+.dark .glass-card-hover:hover,
+.dark .saas-card-hover:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.15);
+}
+
+/* Header & Navbar Dark Mode Enforcement */
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.dark .glass-header,
+.dark header {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border-bottom: 1px solid #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+/* Footer Dark Mode Enforcement */
+.dark footer {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-top: 1px solid #1E293B !important;
+  color: #94A3B8 !important;
+}
+
+.dark footer a,
+.dark footer span,
+.dark footer p {
+  color: #94A3B8;
+}
+
+.dark footer a:hover {
+  color: #38BDF8 !important;
+}
+
+.dark footer h4 {
+  color: #F8FAFC !important;
+}
+
+/* Ambient Subtle Gradients */
+.hero-gradient {
+  background: radial-gradient(circle at 50% -20%, rgba(2, 132, 199, 0.08), transparent 70%),
+              radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.05), transparent 50%);
+}
+
+.dark .hero-gradient {
+  background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.12), transparent 70%),
+              radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.06), transparent 50%);
+}
+
+/* Continuous Marquee Animation (Left to Right) */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 22s linear infinite;
+}
+
+.animate-marquee-ltr:hover {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* Continuous Left-to-Right Animated Text Wave & Light Sweep */
+@keyframes continuous-sweep-ltr {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-continuous-text-ltr {
+  background: linear-gradient(
+    90deg,
+    #0F172A 0%,
+    #0F172A 35%,
+    #0284C7 50%,
+    #06B6D4 60%,
+    #0F172A 75%,
+    #0F172A 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: continuous-sweep-ltr 4s linear infinite;
+}
+
+.dark .animate-continuous-text-ltr {
+  background: linear-gradient(
+    90deg,
+    #F8FAFC 0%,
+    #F8FAFC 35%,
+    #38BDF8 50%,
+    #2DD4BF 60%,
+    #F8FAFC 75%,
+    #F8FAFC 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: continuous-sweep-ltr 4s linear infinite;
+}
+
+.animate-continuous-gradient-ltr {
+  background: linear-gradient(
+    90deg,
+    #0284C7 0%,
+    #2563EB 25%,
+    #0D9488 50%,
+    #0284C7 75%,
+    #2563EB 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: continuous-sweep-ltr 3.5s linear infinite;
+}
+
+.dark .animate-continuous-gradient-ltr {
+  background: linear-gradient(
+    90deg,
+    #38BDF8 0%,
+    #60A5FA 25%,
+    #2DD4BF 50%,
+    #38BDF8 75%,
+    #60A5FA 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: continuous-sweep-ltr 3.5s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
